@@ -1,0 +1,150 @@
+CREATE TABLE IF NOT EXISTS books(
+	book_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	author_id INTEGER UNSIGNED,
+	title VARCHAR(100) NOT NULL,
+	year INTEGER UNSIGNED NOT NULL DEFAULT 1900,
+	language VARCHAR(2) NOT NULL DEFAULT 'es' COMMENT 'ISO 639-1 Language',
+	cover_url VARCHAR(500),
+	price DOUBLE(6,2) NOT NULL DEFAULT 10.0,
+	sellable TINYINT(1) DEFAULT 1,
+	copies INTEGER NOT NULL DEFAULT 1,
+	description TEXT
+	
+);
+
+CREATE TABLE IF NOT EXISTS authors(
+	author_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	nationality VARCHAR(3)
+);
+
+CREATE TABLE IF NOT EXISTS clients(
+	client_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	birthdate DATETIME,
+	gender ENUM('M','F','ND') NOT NULL,
+	active TINYINT(1) NOT NULL DEFAULT 1,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS operations(
+	operation_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	book_id INTEGER UNSIGNED,
+	client_id INTEGER UNSIGNED,
+	type ENUM('SOLD','BORROW','RETURNED'),
+	finished TINYINT(1) NOT NULL COMMENT 'SOLD(1), BORROW(0), RETURNED',
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	
+);
+
+INSERT INTO authors(name,nationality) VALUES('Juan Rulfo','MEX');
+
+INSERT INTO authors(name,nationality) VALUES('Gabriel Garcia Marquez','COL');
+
+INSERT INTO authors(name,nationality) VALUES('Juan Gabriel Vasquez','COL');
+
+INSERT INTO authors(name,nationality) VALUES('Julio Cortazar','ARG'), ('Isabel Allende','CHI') 
+,('Paulo Coelho','BRA');
+
+INSERT INTO clients(name,email,birthdate,gender) values('Maria Dolores Gomez','mariadolores@random.com','1990-08-14','F'),
+('Adrian Fernandez','adrianfernandez@random.com','2000-01-01','M'),
+('Maria Luisa Marin','marialuisa@random.com','1998-08-31','F'),
+('Pedro Sanchez','pedrito@random.com','1997-04-12','ND');
+
+INSERT INTO books(title, author_id) values("100 años de soledad",1);
+
+INSERT INTO books(title,author_id,year) values('Vuelta al Laberinto de la Soledad', (Select author_id FROM authors WHERE name = 'Octavio Paz' LIMIT 1), 1960);
+
+INSERT INTO authors(name,nationality) VALUES('Leonard Mlodinow','USA'), ('Stephen Hawking','USA') 
+,('Frank Shih','JAP'),
+('Henning Mankel','SWE'), 
+('Cedric Villani','FRA') 
+,('Sebastian Gutierrez','ESP');
+
+
+
+INSERT INTO clients(name,email,birthdate,gender) values('Dolores Gomez','dolores@random.com','1990-10-14','F'),
+('Pedro Fernandez','pedrofernandez@random.com','2000-01-01','M'),
+('Luisa Marin','luisa@random.com','1998-02-28','F'),
+('juan Sanchez','juancho@random.com','2000-04-12','ND'),
+('Dolores Mejia','doloresmejia@random.com','1994-10-14','F'),
+('Pedro Jimenez','pedroJ@random.com','2002-01-01','M'),
+('Luisa Hernandez','luisahernandez@random.com','1998-04-29','F'),
+('juan Pacheco','juanchopacheco@random.com','1968-04-12','ND');
+
+
+INSERT INTO operations(book_id, client_id, type, finished) VALUES (
+3,7,'BORROW',0), (1,2,'SOLD',0), (2,3,'SOLD',1);
+
+
+Select name, email, YEAR(NOW()) - YEAR(birthdate) AS edad, gender from clients where gender = 'F' AND name like '%pach%';
+
+//JOINS
+
+Select b.book_id, a.name, b.title from books as b join authors as a on a.author_id = b.book_id where a.author_id limit 5;
+
+select c.name, b.title, o.type from operations as o 
+join books as b 
+	on o.book_id = b.book_id
+join clients as c 
+	on o.client_id = c.client_id;
+
+select c.name, b.title, o.type from operations as o 
+join books as b 
+	on o.book_id = b.book_id
+join clients as c 
+	on o.client_id = c.client_id
+where c.gender = 'F' AND o.type = 'SOLD';
+
+select c.name, b.title, o.type, a.name AS Nombre_Autor from operations as o 
+join books as b 
+	on o.book_id = b.book_id
+join clients as c 
+	on o.client_id = c.client_id
+join authors as a
+	on b.author_id = a.author_id;
+
+select a.author_id,a.name,a.nationality,b.title
+from authors as a
+join books as b
+	on b.author_id = a.author_id
+order by a.author_id limit 5;
+//LEFT JOIN
+select a.author_id,a.name,a.nationality,b.title
+from authors as a
+left join books as b
+	on b.author_id = a.author_id
+order by a.author_id;
+
+select a.author_id,a.name,a.nationality,b.title, COUNT(b.book_id)
+from authors as a
+left join books as b
+	on b.author_id = a.author_id
+GROUP BY a.author_id
+order by a.author_id;
+
+//Querys
+Nacionalidades: SELECT DISTINCT(nationality) from authors;
+Autores por nacionalidad: SELECT nationality,COUNT(author_id) as c_authors from authors group by nationality order by nationality;
+reporte final:
+
+select c.name, o.type, CONCAT(a.name,"(", a.nationality,")") AS Author_name, b.title, TO_DAYS(NOW()) - TO_DAYS(o.created_at) AS Prestamo from operations as o
+left join clients as c
+	on c.client_id = o.client_id
+left join books as b
+	on b.book_id = o.book_id
+left join authors as a
+	on b.author_id = a.author_id;
+
+delete from authors where author_id = 161 limit 1;
+update clients set active = 0 where client_id = 1 limit 1;
+
+//ADD COLUMN TABLE
+alter table authors add column birthyear integer default 1930 after name;
+//MODIFY COLUM TABLE
+alter table authors modify column birthyear year default 1920;
+//DELETE COLUMN
+alter table authors drop column birthyear;

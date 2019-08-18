@@ -1,0 +1,18 @@
+//show tables attributes
+desc "table name"; ej: desc books;
+
+//show full tables attributes
+show full colums from "table name";
+
+//don't show in the query
+where nationality IS NOT NULL // WHERE nationality NOT IN('COL','ARG')
+
+//Backup
+
+mysqldump -u root -p "nombre DB"
+
+//Schema
+mysqldump -u root -p -d "nombre DB" // sin datos
+
+//Archivo sql
+mysqldump -u root -p -d "nombre DB" > esquema.sql
