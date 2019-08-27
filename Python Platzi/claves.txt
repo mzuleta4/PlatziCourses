@@ -1,0 +1,87 @@
+//Metodos
+ >>> def my_first_function():
+ ...	return “Hello World!” 
+ ...    
+ >>> my_first_function()
+
+
+//Diccionario
+ >>> D = {"Kill Bill": "Tamarino", "Amelie": "Jean-Pierre Jeunet"} 
+ >>> D["Kill Bill"]
+ "Tamarino"
+
+// Conversiones
+De flotante a entero:
+
+ >>> int(4.3)
+ 4
+De entero a flotante:
+
+ >>> float(4) 
+ 4.0
+De entero a string:
+
+ >>> str(4.3) 
+ "4.3"
+
+//Operadores Comunes
+//Longitud de una cadena, lista, tupla, etc.:
+
+ >>> len("key") 
+ 3
+//Tipo de dato:
+
+ >>> type(4) 
+ < type int >
+
+//Aplicar una conversión a un conjunto como una lista:
+
+ >>> map(str, [1, 2, 3, 4])
+ ['1', '2', '3', '4']
+
+//Redondear un flotante con x número de decimales:
+
+>>> round(6.3243, 1)
+ 6.3
+
+//Generar un rango en una lista (esto es mágico):
+
+ >>> range(5) 
+ [0, 1, 2, 3, 4]
+
+//Sumar un conjunto:
+
+ >>> sum([1, 2, 4]) 
+ 7
+
+//Organizar un conjunto:
+
+ >>> sorted([5, 2, 1]) 
+ [1, 2, 5]
+
+//Conocer los comandos que le puedes aplicar a x tipo de datos:
+
+ >>>Li = [5, 2, 1]
+ >>>dir(Li)
+ >>>['append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+//Clase
+ >>> class Estudiante(object): 
+ ... 	def __init__(self,nombre_r,edad_r): 
+ ... 		self.nombre = nombre_r 
+ ... 		self.edad = edad_r 
+ ...
+ ... 	def hola(self): 
+ ... 		return "Mi nombre es %s y tengo %i" % (self.nombre, self.edad) 
+ ... 
+ >>> e = Estudiante(“Arturo”, 21) 
+ >>> print e.hola() 
+ Mi nombre es Arturo y tengo 21
+
+//conficionales
+ if ( a > b ):
+ 	elementos 
+ elif ( a == b ): 
+ 	elementos 
+ else:
+ 	elementos
