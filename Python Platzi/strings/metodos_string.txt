@@ -1,0 +1,14 @@
+upper()
+isupper()
+lower()
+islower()
+find()
+isdigit()
+endswith()
+startswith()
+split()
+join()
+
+s = 'martin'
+s[1:] // mostrar desde cierto indice o limitar con // s[1:6]
+s[start:end:step] // se puede declarar un inicio, donde termina y a paso de cuanto

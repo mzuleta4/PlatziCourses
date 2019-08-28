@@ -1,0 +1,9 @@
+range(5) // genera un rango [0,1,2,3,4,5]
+range[start:end:step] // se puede declarar un inicio, donde termina y a paso de cuanto
+
+2**2 // elevar al cuadrado
+
+
+//iteracion con for
+for i in range(5):
+    print(i)
