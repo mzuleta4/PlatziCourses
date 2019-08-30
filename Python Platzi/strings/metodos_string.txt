@@ -12,3 +12,4 @@ join()
 s = 'martin'
 s[1:] // mostrar desde cierto indice o limitar con // s[1:6]
 s[start:end:step] // se puede declarar un inicio, donde termina y a paso de cuanto
+reversed_word = word[::-1] // revertir palabra
