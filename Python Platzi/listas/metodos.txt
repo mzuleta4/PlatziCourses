@@ -1,0 +1,9 @@
+dic = {}
+dic['uno'] = 1
+for key in dic:
+    print(key) // recorrer por key
+for key in dic.values():
+    print(key) // recorrer por values
+
+for key, value in dic.iteritems():
+    print('llave {}, valor {}'.format(key,value)) // recorrer por key & values
