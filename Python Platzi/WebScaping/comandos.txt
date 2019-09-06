@@ -1,0 +1,5 @@
+virtualenv 'nombre del entorno' // crear entorno virtual
+.\venv\Scripts\activate // activar entorno
+.\venv\Scripts\deactivate //desactivar entorno
+hay que correr el entorno desde el active en la consola
+pip install -r requirements.txt // instalar dependencias del archivo txt

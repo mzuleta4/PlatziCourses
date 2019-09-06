@@ -1,0 +1,3 @@
+virtualenv 'nombre del entorno' // crear entorno virtual
+.\venv\Scripts\activate // activar entorno
+hay que correr el entorno desde el active en la consola
