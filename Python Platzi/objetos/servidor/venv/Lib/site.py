@@ -456,7 +456,7 @@ class _Printer(object):
                 key = None
                 while key is None:
                     try:
-                        key = raw_input(prompt)
+                        key = input(prompt)
                     except NameError:
                         key = input(prompt)
                     if key not in ("", "q"):
