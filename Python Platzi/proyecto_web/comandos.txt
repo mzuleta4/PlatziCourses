@@ -1,0 +1,6 @@
+virtualenv 'nombre del entorno' // crear entorno virtual
+.\venv\Scripts\activate // activar entorno
+hay que correr el entorno desde el active en la consola
+
+correr en servidor google claud con un Scripts que trae el SDK 
+dev_appserver.py .
