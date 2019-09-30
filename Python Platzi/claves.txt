@@ -85,3 +85,26 @@ De entero a string:
  	elementos 
  else:
  	elementos
+
+// Definir metodos dentro de metodos
+
+def convert(number):
+    def pling(): return 'Pling' if number % 3 == 0 else ''
+    def plang(): return 'Plang' if number % 5 == 0 else ''
+    def plong(): return 'Plong' if number % 7 == 0 else ''
+    result = "".join([pling(), plang(), plong()])
+    return result if result else str(number)
+
+//matrices
+
+class Matrix(object):
+    def __init__(self, matrix_string):
+        self.matrix_string = matrix_string
+        self.rows = matrix_string.split('\n')
+        pass
+
+    def row(self, index):
+        return  [int(number) for number in self.rows[index-1].split()] // 	split separa cada elemento en una lista
+
+    def column(self, index):
+        return [int(row.split()[index-1]) for row in self.rows]

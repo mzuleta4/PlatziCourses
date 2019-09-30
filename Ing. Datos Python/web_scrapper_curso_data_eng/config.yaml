@@ -1,0 +1,13 @@
+news_sites:
+elheraldo:
+url:https://www.elheraldo.co/
+queries:
+homepage_article_links:".tituloa"
+article_body:".descriptionreadspeaker"
+article_title:".titleh1"
+eluniversal:
+url:https://www.eluniversal.com.mx
+queries:
+homepage_article_links:".field-contenta"
+article_body:".field-name-body"
+article_title:".pane-contenth1"

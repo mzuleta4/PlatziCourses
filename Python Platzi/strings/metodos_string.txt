@@ -8,6 +8,7 @@ endswith()
 startswith()
 split()
 join()
+sorted()
 
 s = 'martin'
 s[1:] // mostrar desde cierto indice o limitar con // s[1:6]

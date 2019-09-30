@@ -1,0 +1,7 @@
+//creaciondelentornovirtual,--namenombraelarchivoyposteriorse
+nombranlospaquetesquevamosautilizar
+
+(base)C:\Users\LUCYLEONOR>condacreate--nameplatzi_databeautifulsoup4requestsnumpypandasmatplotlibyaml
+
+//activarelambientevirtual
+condaactivate
